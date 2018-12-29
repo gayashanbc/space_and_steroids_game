@@ -1,6 +1,6 @@
 /* Spaceship
  * Author: Gayashan Bombuwala | 2015047 | W1582950
- * Creation date: 12/29/18
+ * Creation date: 11/29/18
  */
 MACHINE
     Spaceship SEES Space
@@ -219,19 +219,14 @@ OPERATIONS
                 END
             END;
             
-//    location, power, accidents <-- MissionStatus =
-//            PRE
-//                location : grid & location /: asteroids
-//                &
-//                power : NAT & power <= initial_power_units
-//                & accidents : NAT
-//            THEN
-//                location := (current_column |-> current_row)
-//                ||
-//                power := power_units
-//                ||
-//                accidents := accident_count
-//            END;
+    location, power, accidents <-- MissionStatus =
+            BEGIN
+                location := (current_column |-> current_row)
+                ||
+                power := power_units
+                ||
+                accidents := accident_count
+            END;
             
     result <-- MissionRoute =
             BEGIN

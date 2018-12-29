@@ -26,11 +26,9 @@ PROPERTIES
     warp_units : NAT1 & warp_units = 20
     
 VARIABLES
-    current_location, current_row, current_column, route, power_units, accident_count
+    current_row, current_column, route, power_units, accident_count
     
 INVARIANT
-    current_location : grid
-    &
     current_row : NAT1 & current_row <=7
     &
     current_column : NAT1 & current_column <=12
@@ -42,8 +40,6 @@ INVARIANT
     accident_count : NAT
     
 INITIALISATION
-    current_location := homebase
-    ||
     current_row := 1
     ||
     current_column := 1

@@ -10,9 +10,7 @@ SETS
         FORWARD_MOVE_SUCCESS, BACKWARD_MOVE_SUCCESS, UP_MOVE_SUCCESS, DOWN_MOVE_SUCCESS,
         WARP_DRIVE_SUCCESS, MOVE_FAILED_OUT_OF_BOUNDARY, MOVE_FAILED_OUT_OF_POWER,
         MOVE_FAILED_ASTEROID_COLLISION     
-    };
-    SPACESHIP_LOCATION = { DOCKED_AT_STARBASE, NOT_DOCKED_AT_STARBASE };
-    GAME_STATUS = { Game_WON, Game_LOST, Game_Not_Over }
+    }
     
 CONSTANTS
     initial_power_units, move_units, collision_units, warp_units
@@ -214,46 +212,6 @@ OPERATIONS
                 ELSE
                     result := MOVE_FAILED_OUT_OF_POWER
                 END
-            END;
-            
-    location, power, accidents <-- MissionStatus =
-            BEGIN
-                location := (current_column |-> current_row)
-                ||
-                power := power_units
-                ||
-                accidents := accident_count
-            END;
-            
-    result <-- MissionRoute =
-            BEGIN
-                result := route
-            END;
+            END           
     
-    result <-- DockedAtStarbase = 
-            PRE
-                result : SPACESHIP_LOCATION
-            THEN
-                IF ( (current_column |-> current_row) = starbase )
-                THEN
-                    result := DOCKED_AT_STARBASE
-                ELSE
-                    result := NOT_DOCKED_AT_STARBASE
-                END
-            END;
-           
-    result <-- GameStatus = 
-            PRE
-                result : GAME_STATUS
-            THEN
-                IF ( (current_column |-> current_row) = starbase )
-                THEN
-                    result := Game_WON
-                ELSIF (power_units < collision_units)
-                THEN
-                    result := Game_LOST
-                ELSE
-                    result := Game_Not_Over
-                END
-            END
 END

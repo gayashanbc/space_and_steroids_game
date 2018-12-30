@@ -1,6 +1,9 @@
 digraph {
 Space [ label=" Space " shape= box ]
 Spaceship [ label=" Spaceship " shape= box ]
+Status [ label=" Status " shape= box ]
 
 "Spaceship" -> "Space" [style= dotted ]
+"Status" -> "Space" [style= dotted ]
+"Status" -> "Spaceship" [style= dotted ]
 }

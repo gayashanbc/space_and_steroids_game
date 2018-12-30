@@ -10,5 +10,8 @@
         <component_file path="/Users/shan/Documents/reasoning/Coursework" name="Spaceship" suffix="mch" user="shan">
             <component name="Spaceship" type="specification" />
         </component_file>
+        <component_file path="/Users/shan/Documents/reasoning/Coursework" name="Status" suffix="mch" user="shan">
+            <component name="Status" type="specification" />
+        </component_file>
     </project>
 </db_xml>

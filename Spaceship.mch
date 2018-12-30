@@ -6,12 +6,13 @@ MACHINE
     Spaceship SEES Space
     
 SETS
-    OPERATION_RESULT = {
+    MOVEMENT_RESULT = {
         FORWARD_MOVE_SUCCESS, BACKWARD_MOVE_SUCCESS, UP_MOVE_SUCCESS, DOWN_MOVE_SUCCESS,
         WARP_DRIVE_SUCCESS, MOVE_FAILED_OUT_OF_BOUNDARY, MOVE_FAILED_OUT_OF_POWER,
-        MOVE_FAILED_ASTEROID_COLLISION, DOCKED_AT_STARBASE, NOT_DOCKED_AT_STARBASE,
-        Game_WON, Game_LOST, Game_Not_Over
-    }
+        MOVE_FAILED_ASTEROID_COLLISION     
+    };
+    SPACESHIP_LOCATION = { DOCKED_AT_STARBASE, NOT_DOCKED_AT_STARBASE };
+    GAME_STATUS = { Game_WON, Game_LOST, Game_Not_Over }
     
 CONSTANTS
     initial_power_units, move_units, collision_units, warp_units
@@ -53,7 +54,7 @@ INITIALISATION
 OPERATIONS
     result <-- MoveUp = 
             PRE
-                result : OPERATION_RESULT & (current_column |-> current_row) /= starbase
+                result : MOVEMENT_RESULT & (current_column |-> current_row) /= starbase
             THEN
                 IF (power_units >= collision_units)
                 THEN
@@ -85,7 +86,7 @@ OPERATIONS
             
     result <-- MoveDown = 
             PRE
-                result : OPERATION_RESULT & (current_column |-> current_row) /= starbase
+                result : MOVEMENT_RESULT & (current_column |-> current_row) /= starbase
             THEN
                 IF (power_units >= collision_units)
                 THEN
@@ -117,7 +118,7 @@ OPERATIONS
             
     result <-- MoveForward = 
             PRE
-                result : OPERATION_RESULT & (current_column |-> current_row) /= starbase
+                result : MOVEMENT_RESULT & (current_column |-> current_row) /= starbase
             THEN
                 IF (power_units >= collision_units)
                 THEN
@@ -149,7 +150,7 @@ OPERATIONS
             
     result <-- MoveBackward = 
             PRE
-                result : OPERATION_RESULT & (current_column |-> current_row) /= starbase
+                result : MOVEMENT_RESULT & (current_column |-> current_row) /= starbase
             THEN
                 IF (power_units >= collision_units)
                 THEN
@@ -181,7 +182,7 @@ OPERATIONS
             
     result <-- EngageWarpDrive ( new_position ) = 
             PRE
-                result : OPERATION_RESULT & (current_column |-> current_row) /= starbase
+                result : MOVEMENT_RESULT & (current_column |-> current_row) /= starbase
                 & 
                 new_position : grid & new_position /= (current_column |-> current_row)
             THEN
@@ -231,7 +232,7 @@ OPERATIONS
     
     result <-- DockedAtStarbase = 
             PRE
-                result : OPERATION_RESULT
+                result : SPACESHIP_LOCATION
             THEN
                 IF ( (current_column |-> current_row) = starbase )
                 THEN
@@ -243,7 +244,7 @@ OPERATIONS
            
     result <-- GameStatus = 
             PRE
-                result : OPERATION_RESULT
+                result : GAME_STATUS
             THEN
                 IF ( (current_column |-> current_row) = starbase )
                 THEN
